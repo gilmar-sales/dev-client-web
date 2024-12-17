@@ -17,20 +17,18 @@
     color: #333;
     line-height: 60px;
   }
+  
+    
+.el-footer {
+    background-color: #409EFF;
+    color: #333;
+    line-height: 60px;
+  }
 </style>
 
     <div id="app">
-        <el-container style="height: 95vh; width: 99vw;">
+        <el-container style="height: 98vh; width: 99vw;">
             <el-header style="text-align: right; font-size: 12px">
-              <el-dropdown>
-                <i class="el-icon-setting" style="margin-right: 15px"></i>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>View</el-dropdown-item>
-                  <el-dropdown-item>Add</el-dropdown-item>
-                  <el-dropdown-item>Delete</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-              <span>Tom</span>
             </el-header>
             <el-main>
                 <el-checkbox v-model="exibirSpan">Exibir Span</el-checkbox>
@@ -42,6 +40,10 @@
                         <div>{{topico.descricao}}</div>
                     </el-collapse-item>
                 </el-collapse>
+
+                <br/>
+                {{message}}
+                <el-button type="primary" v-on:click="onClick">Inverter mensagem</el-button>
             </el-main>
             <el-footer></el-footer>
         </el-container>
@@ -62,9 +64,11 @@
                     { titulo: 'Cross Site Scripting - XSS', descricao: 'Normalmente ocorre quando se utiliza conteúdos de terceiros (CDNs, Propagandas, etc...) em uma aplicação, esses conteúdos podem conseguir injetar algum script malicioso.' },
                     { titulo: 'Denial of Service - DoS', descricao: 'Ataques de negação de serviço podem acontecer pela força bruta, que podem ser barrados com uma simples limitação de requisições por usuário, porém, caso um usuário encontre um endpoint que possui um algoritmo muito complexo assintoticamente, este endpoint poderá ser explorado para negar o serviço sem passar do limite de requisições.' }
                 ],
-                activeNames: [],
-                onSubmit: () => {
-                    alert('Teste');
+                activeNames: []
+            },
+            methods: {
+                onClick: function () {
+                    this.message = this.message.split('').reverse().join('');
                 }
             }
         })
