@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset='utf-8'>
+    <title>Exemplo Vue</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+
+<style>
+    
+.el-header {
+    background-color: #409EFF;
+    color: #333;
+    line-height: 60px;
+  }
+</style>
+
+    <div id="app">
+        <el-container style="height: 95vh; width: 99vw;">
+            <el-header style="text-align: right; font-size: 12px">
+              <el-dropdown>
+                <i class="el-icon-setting" style="margin-right: 15px"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>View</el-dropdown-item>
+                  <el-dropdown-item>Add</el-dropdown-item>
+                  <el-dropdown-item>Delete</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+              <span>Tom</span>
+            </el-header>
+            <el-main>
+                <el-checkbox v-model="exibirSpan">Exibir Span</el-checkbox>
+                <br />
+                <span v-if="exibirSpan" v-bind:title="message">Span com v-bind:title</span>
+                <br />
+                <el-collapse v-model="activeNames">
+                    <el-collapse-item v-for="(topico, indice) in topicos" v-bind:title="topico.titulo" v-bind:name="indice">
+                        <div>{{topico.descricao}}</div>
+                    </el-collapse-item>
+                </el-collapse>
+            </el-main>
+            <el-footer></el-footer>
+        </el-container>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Olá Vue!',
+                exibirSpan: true,
+                topicos: [
+                    { titulo: 'Cross-Site Request Forgery - CSRF', descricao: 'Ocorre quando sites de terceiros conseguem interceptar as credenciais dos usuários de um aplicativo.' },
+                    { titulo: 'Cross Site Scripting - XSS', descricao: 'Normalmente ocorre quando se utiliza conteúdos de terceiros (CDNs, Propagandas, etc...) em uma aplicação, esses conteúdos podem conseguir injetar algum script malicioso.' },
+                    { titulo: 'Denial of Service - DoS', descricao: 'Ataques de negação de serviço podem acontecer pela força bruta, que podem ser barrados com uma simples limitação de requisições por usuário, porém, caso um usuário encontre um endpoint que possui um algoritmo muito complexo assintoticamente, este endpoint poderá ser explorado para negar o serviço sem passar do limite de requisições.' }
+                ],
+                activeNames: [],
+                onSubmit: () => {
+                    alert('Teste');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
